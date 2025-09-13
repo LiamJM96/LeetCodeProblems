@@ -12,7 +12,7 @@ public abstract class ProblemBase : IProblem
 		var attribute = (LeetCodeAttribute?)Attribute.GetCustomAttribute(type, typeof(LeetCodeAttribute));
 
 		if (attribute is not null)
-			System.Console.WriteLine($"{attribute.Id}: {attribute.Title} - ({attribute.Difficulty}) - {attribute.Url}");
+			System.Console.WriteLine($"{attribute.Id}: {attribute.Title} - ({attribute.Difficulty}) - {attribute.Url}\n");
 
 		var i = 1;
 		foreach (var testCase in TestCases)
@@ -20,10 +20,11 @@ public abstract class ProblemBase : IProblem
 			var sw = Stopwatch.StartNew();
 
 			bool passed;
+			var actual = string.Empty;
 
 			try
 			{
-				passed = testCase.Execute();
+				passed = testCase.Execute(out actual);
 			}
 			catch (Exception e)
 			{
@@ -36,6 +37,7 @@ public abstract class ProblemBase : IProblem
 			var status = passed ? "PASSED" : "FAILED";
 			
 			System.Console.WriteLine($"Test Case {i}: {status} - {testCase.InputDescription} - {sw.ElapsedMilliseconds}ms");
+			System.Console.WriteLine($"Actual: {actual}\n");
 
 			i++;
 		}

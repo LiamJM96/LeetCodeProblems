@@ -47,11 +47,22 @@ public class TwoSum : ProblemBase
 	public override IEnumerable<ITestCase> TestCases => new List<ITestCase>
 	{
 		new TwoSumTestCase([2, 7, 11, 15], 9, [0, 1]),
+		new TwoSumTestCase([3, 2, 4], 6, [1, 2]),
+		new TwoSumTestCase([3, 3], 6, [0, 1]),
 	};
 	
 	private static int[] Solve(int[] nums, int target)
 	{
-		return [0, 1];
+		for (var i = 0; i < nums.Length; i++)
+		{
+			if (i == nums.Length - 1)
+				return [];
+			
+			if (nums[i] + nums[i + 1] == target)
+				return [i, i + 1];
+		}
+		
+		return [];
 	}
 
 	private class TwoSumTestCase(int[] nums, int target, int[] expected) : ITestCase
@@ -63,9 +74,12 @@ public class TwoSum : ProblemBase
 		public string InputDescription => 
 			$"nums = [{string.Join(", ", _nums)}], target = {_target}, expected = [{string.Join(", ", _expected)}]";
 
-		public bool Execute()
+		public bool Execute(out string actual)
 		{
 			var result = Solve(_nums, _target);
+
+			actual = $"[{string.Join(", ", result)}]";
+			
 			return result.SequenceEqual(_expected);
 		}
 	}
