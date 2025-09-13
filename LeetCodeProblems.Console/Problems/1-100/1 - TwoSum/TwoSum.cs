@@ -49,17 +49,22 @@ public class TwoSum : ProblemBase
 		new TwoSumTestCase([2, 7, 11, 15], 9, [0, 1]),
 		new TwoSumTestCase([3, 2, 4], 6, [1, 2]),
 		new TwoSumTestCase([3, 3], 6, [0, 1]),
+		new TwoSumTestCase([3, 2, 3], 6, [0, 2]),
 	};
 	
 	private static int[] Solve(int[] nums, int target)
 	{
+		var dict = new Dictionary<int, int>();
+
 		for (var i = 0; i < nums.Length; i++)
 		{
-			if (i == nums.Length - 1)
-				return [];
+			var difference = target - nums[i];
 			
-			if (nums[i] + nums[i + 1] == target)
-				return [i, i + 1];
+			if (dict.TryGetValue(difference, out var value))
+				return [value, i];
+			
+			dict.TryAdd(nums[i], i);
+
 		}
 		
 		return [];
