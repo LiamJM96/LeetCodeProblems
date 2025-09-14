@@ -1,2 +1,2 @@
-﻿var problem = new TwoSum();
+﻿var problem = new MergeStringsAlternately();
 problem.Run();
