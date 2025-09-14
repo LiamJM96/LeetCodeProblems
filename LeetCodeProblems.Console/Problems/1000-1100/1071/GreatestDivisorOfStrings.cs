@@ -37,9 +37,7 @@ public class GreatestDivisorOfStrings : ProblemBase
 
 		var result = GetGreatestCommonDivisor(str1.Length, str2.Length);
 
-		var combined = str1 + str2;
-
-		return combined[..result];
+		return str1[..result];
 	}
 
 	private static int GetGreatestCommonDivisor(int a, int b)
