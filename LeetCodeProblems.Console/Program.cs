@@ -1,2 +1,2 @@
-﻿var problem = new MergeStringsAlternately();
+﻿var problem = new GreatestDivisorOfStrings();
 problem.Run();
